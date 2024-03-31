@@ -1,5 +1,18 @@
 # tidyCoverage
 
+The `tidyCoverage` R package provides a framework for rapid investigation of collections of genomic tracks over genomic features, relying on the principle of tidy data manipulation. It relies on `CoverageExperiment` and `AggregatedCoverage` classes, directly extending the `SummarizedExperiment` fundamental class,
+
+## Installation 
+
+In `R >= 4.4` and `Bioconductor >= 3.19`: 
+
+```r
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("tidyCoverage")
+```
+
 ## Load libraries and example datasets
 
 ```r
@@ -26,10 +39,15 @@ tracks <- list(
 ) |> BigWigFileList()
 ```
 
-## Plot tracks coverage aggregated over genomic features
+## Extract coverage for each track over each set of features
 
 ```r
 CE <- CoverageExperiment(tracks, features, width = 1000, ignore.strand = FALSE) 
+```
+
+## Plot tracks coverage aggregated over genomic features
+
+```r
 CE |> 
     filter(track %in% c('MNase', 'PolII')) |> 
     filter(features == 'TSSs') |> 
