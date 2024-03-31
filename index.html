@@ -9,7 +9,7 @@
     of collections of genomic tracks and features using 
     `tidySummarizedExperiment` methods. It facilitates the 
     extraction, aggregation and visualization of genomic coverage over 
-    individual of thousands of genomic loci, relying on `CoverageExperiment`
+    individual or thousands of genomic loci, relying on `CoverageExperiment`
     and `AggregatedCoverage` classes. This accelerates the integration 
     of genomic track data in genomic analysis workflows. ">
 <title>Extract and aggregate genomic coverage over features of interest • tidyCoverage</title>
@@ -22,7 +22,7 @@
     of collections of genomic tracks and features using 
     `tidySummarizedExperiment` methods. It facilitates the 
     extraction, aggregation and visualization of genomic coverage over 
-    individual of thousands of genomic loci, relying on `CoverageExperiment`
+    individual or thousands of genomic loci, relying on `CoverageExperiment`
     and `AggregatedCoverage` classes. This accelerates the integration 
     of genomic track data in genomic analysis workflows. ">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -38,7 +38,7 @@
     
     <a class="navbar-brand me-2" href="index.html">tidyCoverage</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,10 +75,21 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="tidycoverage">tidyCoverage<a class="anchor" aria-label="anchor" href="#tidycoverage"></a>
 </h1></div>
+<p>The <code>tidyCoverage</code> R package provides a framework for rapid investigation of collections of genomic tracks over genomic features, relying on the principle of tidy data manipulation. It relies on <code>CoverageExperiment</code> and <code>AggregatedCoverage</code> classes, directly extending the <code>SummarizedExperiment</code> fundamental class,</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>In <code>R &gt;= 4.4</code> and <code>Bioconductor &gt;= 3.19</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://bioconductor.github.io/BiocManager/" class="external-link">"BiocManager"</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"tidyCoverage"</span><span class="op">)</span></span></code></pre></div>
+</div>
 <div class="section level2">
 <h2 id="load-libraries-and-example-datasets">Load libraries and example datasets<a class="anchor" aria-label="anchor" href="#load-libraries-and-example-datasets"></a>
 </h2>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/js2264/tidyCoverage" class="external-link">tidyCoverage</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/stemangiola/tidySummarizedExperiment" class="external-link">tidySummarizedExperiment</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">rtracklayer</span><span class="op">)</span></span>
@@ -102,10 +113,16 @@
 <span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/rtracklayer/man/BigWigFile.html" class="external-link">BigWigFileList</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
+<h2 id="extract-coverage-for-each-track-over-each-set-of-features">Extract coverage for each track over each set of features<a class="anchor" aria-label="anchor" href="#extract-coverage-for-each-track-over-each-set-of-features"></a>
+</h2>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">CE</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/CoverageExperiment.html">CoverageExperiment</a></span><span class="op">(</span><span class="va">tracks</span>, <span class="va">features</span>, width <span class="op">=</span> <span class="fl">1000</span>, ignore.strand <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span></code></pre></div>
+</div>
+<div class="section level2">
 <h2 id="plot-tracks-coverage-aggregated-over-genomic-features">Plot tracks coverage aggregated over genomic features<a class="anchor" aria-label="anchor" href="#plot-tracks-coverage-aggregated-over-genomic-features"></a>
 </h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/CoverageExperiment.html">CoverageExperiment</a></span><span class="op">(</span><span class="va">tracks</span>, <span class="va">features</span>, width <span class="op">=</span> <span class="fl">3000</span>, ignore.strand <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">CE</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">track</span> <span class="op"><a href="https://rdrr.io/pkg/BiocGenerics/man/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'MNase'</span>, <span class="st">'PolII'</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">features</span> <span class="op">==</span> <span class="st">'TSSs'</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html" class="external-link">aggregate</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -121,7 +138,7 @@
 <div class="section level2">
 <h2 id="plot-coverage-over-a-single-locus">Plot coverage over a single locus<a class="anchor" aria-label="anchor" href="#plot-coverage-over-a-single-locus"></a>
 </h2>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/CoverageExperiment.html">CoverageExperiment</a></span><span class="op">(</span><span class="va">tracks</span>, <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges</a></span><span class="op">(</span><span class="st">"II:450001-455000"</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html" class="external-link">expand</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">coord</span>, y <span class="op">=</span> <span class="va">coverage</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
@@ -132,10 +149,40 @@
 <span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span>, aspect.ratio <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/cov.png"></p>
 </div>
+<div class="section level2">
+<h2 id="related-projects">Related projects<a class="anchor" aria-label="anchor" href="#related-projects"></a>
+</h2>
+<p>A number of <code>CRAN</code>, <code>Bioconductor</code> or <code>GitHub</code> packages already exist to enable genomic track data visualization, for instance:</p>
+<ul>
+<li>
+<code>Gviz</code> <a href="https://www.bioconductor.org/packages/release/bioc/html/Gviz.html" class="external-link">[Bioconductor]</a>
+</li>
+<li>
+<code>soGGi</code> <a href="https://www.bioconductor.org/packages/release/bioc/html/soGGi.html" class="external-link">[Bioconductor]</a>
+</li>
+<li>
+<code>GenomicPlot</code> <a href="https://www.bioconductor.org/packages/release/bioc/html/GenomicPlot.html" class="external-link">[Bioconductor]</a>
+</li>
+<li>
+<code>plotgardener</code> <a href="https://www.bioconductor.org/packages/release/bioc/html/plotgardener.html" class="external-link">[Bioconductor]</a>
+</li>
+<li>
+<code>genomation</code> <a href="https://www.bioconductor.org/packages/release/bioc/html/genomation.html" class="external-link">[Bioconductor]</a>
+</li>
+<li>
+<code>ggcoverage</code> <a href="https://github.com/showteeth/ggcoverage" class="external-link">[GitHub]</a>
+</li>
+<li>
+<code>GenomicScores</code> <a href="https://www.bioconductor.org/packages/release/bioc/html/GenomicScores.html" class="external-link">[Bioconductor]</a>
+</li>
+</ul>
+<p>Compared to these existing solutions, <code>tidyCoverage</code> directly extends <code>SummarizedExperiment</code> infrastructure and follows <a href="https://www.biorxiv.org/content/10.1101/2023.09.10.557072v2" class="external-link">tidy “omics” principles</a>. It does not directly provide <strong>plotting</strong> functionalities, but instead focuses on data recovery, structure and coercion, using a familiar grammar and standard representation of the data. This ensures seamless integration of genomic track investigation in exisiting <code>Bioconductor</code> and data analysis workflows.</p>
+</div>
 </div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
+<li><a href="https://www.bioconductor.org/packages/tidyCoverage" class="external-link">View on Bioconductor</a></li>
 <li><a href="https://github.com/js2264/tidyCoverage/" class="external-link">Browse source code</a></li>
 <li><a href="https://github.com/js2264/tidyCoverage/issues" class="external-link">Report a bug</a></li>
 </ul>
