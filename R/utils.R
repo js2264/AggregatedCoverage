@@ -10,7 +10,7 @@
             )
         }) |> unique()
         if (length(unique(sis)) > 1) 
-            stop("More than 1 seqinfo inferred from the tracks.")
+            warning("EXPERIMENTAL: More than 1 seqinfo inferred from the tracks. Using `seqinfo` from the first track.")
         si <- sis[[1]]
     } 
     else {
@@ -32,7 +32,7 @@
     n <- names(tracks)
     sis <- lapply(tracks, seqinfo) |> unique()
     if (length(sis) > 1) 
-        stop("More than 1 seqinfo inferred from the tracks.")
+        warning("EXPERIMENTAL: More than 1 seqinfo inferred from the tracks. Using `seqinfo` from the first track.")
     si <- sis[[1]]
     return(tracks)
 } 
