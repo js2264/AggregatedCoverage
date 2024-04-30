@@ -1,6 +1,6 @@
 Package: tidyCoverage
 Title: Extract and aggregate genomic coverage over features of interest
-Version: 0.99.5
+Version: 1.0.0
 Date: 2023-11-09
 Authors@R: 
     person("Jacques", "Serizay", , "jacquesserizay@gmail.com", 
