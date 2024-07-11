@@ -45,6 +45,7 @@ test_that("other CoverageExperiment methods work", {
     x <- BigWigFile(system.file("extdata", "RNA.fwd.bw", package = "tidyCoverage"))
     y <- import(system.file("extdata", "TSSs.bed", package = "tidyCoverage"))[1:200]
     expect_s4_class(CoverageExperiment(x, y, width = 100), "CoverageExperiment")
+    expect_s4_class(CoverageExperiment(x, y), "CoverageExperiment")
 
     # ~~~~~~~~ BigWigFile + GRangesList
     y <- GRangesList(tss = y, tss2 = y)
@@ -74,6 +75,7 @@ test_that("other CoverageExperiment methods work", {
     x <- import(system.file("extdata", "RNA.fwd.bw", package = "tidyCoverage"), as = 'Rle')
     y <- import(system.file("extdata", "TSSs.bed", package = "tidyCoverage"))
     expect_s4_class(CoverageExperiment(x, y, width = 100), "CoverageExperiment")
+    expect_s4_class(CoverageExperiment(x, y), "CoverageExperiment")
 
     # ~~~~~~~~ RleList + GRangesList
     y <- GRangesList(tss = y)

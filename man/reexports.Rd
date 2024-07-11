@@ -19,9 +19,9 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{dplyr}{\code{\link[dplyr:reexports]{as_tibble}}}
+  \item{dplyr}{\code{\link[dplyr]{as_tibble}}}
 
-  \item{S4Vectors}{\code{\link[S4Vectors:aggregate-methods]{aggregate}}}
+  \item{S4Vectors}{\code{\link[S4Vectors]{aggregate}}}
 
   \item{tidyr}{\code{\link[tidyr]{expand}}}
 }}

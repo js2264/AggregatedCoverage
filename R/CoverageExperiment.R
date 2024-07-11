@@ -102,7 +102,7 @@ setMethod(
     "CoverageExperiment", 
     signature(tracks = "BigWigFileList", features = "GRangesList"), 
     function(
-        tracks, features, width, 
+        tracks, features, width = NULL, 
         center = FALSE, scale = FALSE, 
         ignore.strand = TRUE, 
         window = 1, 
@@ -115,7 +115,8 @@ setMethod(
         ## Extend and filter features
         tracks <- .set_seqinfo_bwfl(tracks)
         si <- seqinfo(tracks[[1]])
-        features <- lapply(features, .resize_granges, width = width, seqinfo = si) 
+        if (is.null(width)) .check_granges_widths(features)
+        features <- lapply(features, .resize_granges, width, si) 
 
         ## Prepare cData and rData
         cData <- data.frame(
@@ -274,7 +275,7 @@ setMethod(
     "CoverageExperiment", 
     signature(tracks = "list", features = "GRangesList"), 
     function(
-        tracks, features, width, 
+        tracks, features, width = NULL, 
         center = FALSE, scale = FALSE, 
         ignore.strand = TRUE, 
         window = 1, 
@@ -287,7 +288,8 @@ setMethod(
         ## Extend and filter features
         tracks <- .set_seqinfo(tracks)
         si <- seqinfo(tracks[[1]])[[1]]
-        features <- lapply(features, .resize_granges, width = width, seqinfo = si) 
+        if (is.null(width)) .check_granges_widths(features)
+        features <- lapply(features, .resize_granges, width, si) 
 
         ## Prepare cData and rData
         cData <- data.frame(

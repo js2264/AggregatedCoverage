@@ -52,7 +52,7 @@ CE |>
     filter(track %in% c('MNase', 'PolII')) |> 
     filter(features == 'TSSs') |> 
     aggregate() |> 
-    ggplot(aes(x = coord, y = mean)) + 
+    ggplot(aes(x = coord, y = mean, ymin = ci_low, ymax = ci_high, fill = track, col = track)) + 
     geom_ribbon(aes(ymin = ci_low, ymax = ci_high, fill = track), alpha = 0.2) + 
     geom_line(aes(col = track)) + 
     facet_grid(track ~ ., scales = "free") + 
@@ -66,7 +66,7 @@ CE |>
 ## Plot coverage over a single locus
 
 ```r
-CoverageExperiment(tracks, GRanges("II:450001-455000"), width = 5000) |> 
+CoverageExperiment(tracks, GRanges("II:450001-455000")) |> 
     expand() |> 
     ggplot(aes(x = coord, y = coverage)) + 
         geom_col(aes(fill = track, col = track)) + 

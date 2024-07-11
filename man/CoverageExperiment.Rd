@@ -26,7 +26,7 @@ coarsen(x, window, ...)
 \S4method{CoverageExperiment}{BigWigFileList,GRangesList}(
   tracks,
   features,
-  width,
+  width = NULL,
   center = FALSE,
   scale = FALSE,
   ignore.strand = TRUE,
@@ -47,7 +47,7 @@ coarsen(x, window, ...)
 \S4method{CoverageExperiment}{list,GRangesList}(
   tracks,
   features,
-  width,
+  width = NULL,
   center = FALSE,
   scale = FALSE,
   ignore.strand = TRUE,

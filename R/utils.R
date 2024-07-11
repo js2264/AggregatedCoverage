@@ -37,14 +37,25 @@
     return(tracks)
 } 
 
-.resize_granges <- function(gr, width, seqinfo) {
+.resize_granges <- function(gr, w, seqinfo) {
     GenomeInfoDb::seqlevels(gr, pruning.mode = "coarse") <- GenomeInfoDb::seqlevels(seqinfo)
     GenomeInfoDb::seqinfo(gr) <- seqinfo
-    gr <- suppressWarnings(resize(gr, fix = 'center', width = width))
-    w <- width
+    if (is.null(w)) {
+        w <- width(gr) |> unlist() |> unique()
+    }
+    else {
+        gr <- suppressWarnings(resize(gr, fix = 'center', width = w))
+    }
     gr <- trim(gr)
     gr <- gr[width(gr) == w]
-    sort(gr)
+    gr
+}
+
+.check_granges_widths <- function(features) {
+    ws <- lapply(features, width) |> unlist() |> unique()
+    if (length(ws) > 1)
+        stop("Input GRanges do not all have the same width.
+  Use resize() to fix width prior to coverage data extraction.")
 }
 
 #' @importFrom IRanges NumericList
@@ -58,7 +69,9 @@
         m[which.flip, ] <- rev(m[which.flip, ])
         m <- as.matrix(m)
     }
-    m <- t(scale(t(m), center = center, scale = scale))
+    if (any(c(center, scale))) {
+        m <- t(scale(t(m), center = center, scale = scale))
+    }
     m
 }
 
