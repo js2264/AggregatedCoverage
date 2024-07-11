@@ -35,6 +35,7 @@ Imports:
     rtracklayer,
     methods,
     tidyr, 
+    ggplot2,
     dplyr,
     fansi, 
     pillar, 
@@ -46,7 +47,6 @@ Imports:
 Suggests: 
     tidySummarizedExperiment,
     plyranges,
-    ggplot2,
     TxDb.Hsapiens.UCSC.hg19.knownGene,
     AnnotationHub,
     GenomicFeatures, 

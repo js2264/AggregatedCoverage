@@ -403,39 +403,27 @@ aggregated coverage signal of multiple tracks over multiple sets of genomic rang
 ```{r}
 AC |> 
     as_tibble() |> 
-    ggplot(aes(x = coord, y = mean, group = interaction(features, track), col = track)) + 
-    geom_line()
+    ggplot() + 
+    geom_aggrcoverage()
 ```
 
-This plot is way too busy. Let's first split into facets using `features`:
+Oopsie, a little busy here. Let's color by tracks and split facets by `features`:
 
 ```{r}
 AC |> 
     as_tibble() |> 
-    ggplot(aes(x = coord, y = mean, col = track)) + 
-    geom_line() + 
+    ggplot(aes(col = track)) + 
+    geom_aggrcoverage() + 
     facet_grid(features ~ .)
 ```
 
-Better, but what about adding confidence interval for each coverage track: 
+Nearly there, few cosmethic changes and we are done! 
 
 ```{r}
 AC |> 
     as_tibble() |> 
-    ggplot(aes(x = coord, y = mean)) + 
-    geom_ribbon(aes(ymin = ci_low, ymax = ci_high, fill = track), alpha = 0.2) + 
-    geom_line(aes(col = track)) + 
-    facet_grid(features ~ .)
-```
-
-Nearly there, few cosmethic changes and we're done! 
-
-```{r}
-AC |> 
-    as_tibble() |> 
-    ggplot(aes(x = coord, y = mean)) + 
-    geom_ribbon(aes(ymin = ci_low, ymax = ci_high, fill = track), alpha = 0.2) + 
-    geom_line(aes(col = track)) + 
+    ggplot(aes(col = track, linetype = track %in% c('RNA_fwd', 'RNA_rev'))) + 
+    geom_aggrcoverage() + 
     facet_grid(features ~ .) + 
     labs(x = 'Distance from genomic feature', y = 'Mean coverage (± 95% conf. intervale)') + 
     theme_bw() + 
@@ -470,9 +458,8 @@ if the `tidySummarizedExperiment` package id loaded.
 
 ```{r}
 AC |> 
-    ggplot(aes(x = coord, y = mean)) + 
-    geom_line(aes(col = track)) + 
-    facet_grid(track ~ .) + 
+    ggplot() + 
+    geom_aggrcoverage() + 
     labs(x = 'Distance from locus of convergent transcription', y = 'Scc1 coverage') + 
     theme_bw() + 
     theme(legend.position = 'top')
@@ -487,10 +474,8 @@ AC |>
 CoverageExperiment(tracks, features, width = 5000, scale = TRUE, center = TRUE) |> 
     filter(track == 'RNA_fwd') |> 
     aggregate(bin = 20) |> 
-    ggplot(aes(x = coord, y = mean)) + 
-    geom_ribbon(aes(ymin = ci_low, ymax = ci_high, fill = features), alpha = 0.2) + 
-    geom_line(aes(col = features)) + 
-    facet_grid(features ~ .) + 
+    ggplot(col = features) + 
+    geom_aggrcoverage(aes(col = features)) + 
     labs(x = 'Distance to center of genomic features', y = 'Forward RNA-seq coverage') + 
     theme_bw() + 
     theme(legend.position = 'top')
@@ -538,9 +523,8 @@ CoverageExperiment(
     scale = TRUE, center = TRUE
 ) |> 
     aggregate() |> 
-    ggplot(aes(x = coord, y = mean)) + 
-    geom_ribbon(aes(ymin = ci_low, ymax = ci_high, fill = track), alpha = 0.2) + 
-    geom_line(aes(col = track)) + 
+    ggplot() + 
+    geom_aggrcoverage(aes(col = track)) + 
     facet_grid(track ~ .) + 
     labs(x = 'Distance from TSSs', y = 'Mean coverage') + 
     theme_bw() + 
@@ -586,9 +570,8 @@ AC |>
             stringr::str_detect(track, 'H3') ~ "H3"
         )
     ) |> 
-    ggplot(aes(x = coord, y = mean)) + 
-    geom_ribbon(aes(ymin = ci_low, ymax = ci_high, fill = track), alpha = 0.2) + 
-    geom_line(aes(col = track)) + 
+    ggplot() + 
+    geom_aggrcoverage(aes(col = track)) + 
     facet_grid(~histone) + 
     labs(x = 'Distance from TSSs', y = 'Mean histone PTM coverage') + 
     theme_bw() + 
