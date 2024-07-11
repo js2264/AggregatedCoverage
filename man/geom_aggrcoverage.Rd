@@ -14,6 +14,21 @@ geom_aggrcoverage(
   inherit.aes = TRUE
 )
 }
+\arguments{
+\item{mapping}{mapping}
+
+\item{data}{data}
+
+\item{...}{...}
+
+\item{ci}{ci}
+
+\item{na.rm}{na.rm}
+
+\item{show.legend}{show.legend}
+
+\item{inherit.aes}{inherit.aes}
+}
 \value{
 A \code{ggplot} object`
 }
@@ -27,6 +42,7 @@ A \code{ggplot} object`
 library(rtracklayer)
 library(plyranges)
 library(ggplot2)
+library(purrr)
 TSSs_bed <- system.file("extdata", "TSSs.bed", package = "tidyCoverage")
 features <- list(
     TSS_fwd = import(TSSs_bed) |> filter(strand == '+'), 

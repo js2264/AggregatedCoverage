@@ -7,6 +7,13 @@
 #' @name geom_aggrcoverage
 #' @rdname geom_aggrcoverage
 #' 
+#' @param mapping mapping
+#' @param data data
+#' @param ... ...
+#' @param ci ci
+#' @param na.rm na.rm
+#' @param show.legend show.legend
+#' @param inherit.aes inherit.aes
 #' @return A `ggplot` object`
 #'
 #' @import ggplot2
@@ -15,6 +22,7 @@
 #' library(rtracklayer)
 #' library(plyranges)
 #' library(ggplot2)
+#' library(purrr)
 #' TSSs_bed <- system.file("extdata", "TSSs.bed", package = "tidyCoverage")
 #' features <- list(
 #'     TSS_fwd = import(TSSs_bed) |> filter(strand == '+'), 

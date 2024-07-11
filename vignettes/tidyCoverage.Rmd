@@ -417,7 +417,7 @@ AC |>
     facet_grid(features ~ .)
 ```
 
-Nearly there, few cosmethic changes and we are done! 
+Nearly there, few cosmetic changes and we are done! 
 
 ```{r}
 AC |> 

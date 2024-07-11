@@ -1,5 +1,7 @@
 utils::globalVariables(c(
     ".",
+    "ci_low", 
+    "ci_high", 
     "coord", 
     "feature", 
     ".feature", 

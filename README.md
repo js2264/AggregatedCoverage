@@ -52,9 +52,8 @@ CE |>
     filter(track %in% c('MNase', 'PolII')) |> 
     filter(features == 'TSSs') |> 
     aggregate() |> 
-    ggplot(aes(x = coord, y = mean, ymin = ci_low, ymax = ci_high, fill = track, col = track)) + 
-    geom_ribbon(aes(ymin = ci_low, ymax = ci_high, fill = track), alpha = 0.2) + 
-    geom_line(aes(col = track)) + 
+    ggplot() + 
+    geom_aggrcoverage(aes(col = track)) + 
     facet_grid(track ~ ., scales = "free") + 
     labs(x = 'Distance from TSS', y = 'Signal coverage') + 
     theme_bw() + 
@@ -68,8 +67,8 @@ CE |>
 ```r
 CoverageExperiment(tracks, GRanges("II:450001-455000")) |> 
     expand() |> 
-    ggplot(aes(x = coord, y = coverage)) + 
-        geom_col(aes(fill = track, col = track)) + 
+    ggplot() + 
+        geom_aggrcoverage(aes(col = track)) + 
         facet_grid(track~., scales = 'free') + 
         scale_x_continuous(expand = c(0, 0)) + 
         theme_bw() + 
