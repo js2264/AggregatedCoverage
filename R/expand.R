@@ -38,7 +38,8 @@ expand.CoverageExperiment <- function(data, ..., .name_repair = NULL) {
             m <- assay(data, "coverage")[f, t][[1]] |> 
                 as.data.frame() |>
                 dplyr::mutate(
-                    track = t, features = f, 
+                    track = factor(t, levels = tracks), 
+                    features = factor(f, levels = features), 
                     chr = as.vector(seqnames(rr)), 
                     ranges = as.character(rr), 
                     strand = as.vector(strand(rr))

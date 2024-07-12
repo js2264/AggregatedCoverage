@@ -33,7 +33,8 @@ as_tibble.AggregatedCoverage <- function(x, ...) {
                 dplyr::bind_cols() |> 
                 dplyr::mutate(
                     coord = seq(-w/2, w/2-1, by = bin), 
-                    track = t, features = f
+                    track = factor(t, levels = tracks), 
+                    features = factor(f, levels = features)
                 ) |> 
                 dplyr::relocate(coord) |> 
                 dplyr::relocate(features) |> 
