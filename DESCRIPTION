@@ -40,6 +40,7 @@ Imports:
     fansi, 
     pillar, 
     rlang, 
+    scales, 
     cli, 
     purrr, 
     vctrs, 

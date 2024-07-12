@@ -42,7 +42,7 @@ tracks <- list(
 ## Extract coverage for each track over each set of features
 
 ```r
-CE <- CoverageExperiment(tracks, features, width = 1000, ignore.strand = FALSE) 
+CE <- CoverageExperiment(tracks, features, width = 5000, ignore.strand = FALSE) 
 ```
 
 ## Plot tracks coverage aggregated over genomic features
@@ -55,9 +55,7 @@ CE |>
     ggplot() + 
     geom_aggrcoverage(aes(col = track)) + 
     facet_grid(track ~ ., scales = "free") + 
-    labs(x = 'Distance from TSS', y = 'Signal coverage') + 
-    theme_bw() + 
-    theme(legend.position = 'top')
+    labs(x = 'Distance from TSS', y = 'Signal coverage')
 ```
 
 ![](man/figures/aggr-cov.png)
@@ -68,11 +66,8 @@ CE |>
 CoverageExperiment(tracks, GRanges("II:450001-455000")) |> 
     expand() |> 
     ggplot() + 
-        geom_aggrcoverage(aes(col = track)) + 
-        facet_grid(track~., scales = 'free') + 
-        scale_x_continuous(expand = c(0, 0)) + 
-        theme_bw() + 
-        theme(legend.position = "none", aspect.ratio = 0.1)
+    geom_coverage(aes(fill = track)) + 
+    facet_grid(track~., scales = 'free')
 ```
 
 ![](man/figures/cov.png)

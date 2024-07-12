@@ -4,6 +4,7 @@ utils::globalVariables(c(
     "ci_high", 
     "coord", 
     "feature", 
+    "features", 
     ".feature", 
     ".sample", 
     "track"  
