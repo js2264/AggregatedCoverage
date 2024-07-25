@@ -1,6 +1,6 @@
 Package: tidyCoverage
 Title: Extract and aggregate genomic coverage over features of interest
-Version: 1.1.0
+Version: 1.1.1
 Date: 2023-11-09
 Authors@R: 
     person("Jacques", "Serizay", , "jacquesserizay@gmail.com", 
@@ -54,7 +54,6 @@ Suggests:
     BiocStyle,
     hues, 
     knitr,
-    quarto, 
     rmarkdown,
     sessioninfo,
     testthat (>= 3.0.0)
