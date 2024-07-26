@@ -38,7 +38,7 @@ jobs:
           cont: ~
           rspm: ~
     steps:
-    - uses: neurogenomics/rworkflows@master
+    - uses: js2264/rworkflows@hotfix_quarto
       with:
         run_bioccheck: ${{ false }}
         run_rcmdcheck: ${{ true }}

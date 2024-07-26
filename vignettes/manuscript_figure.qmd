@@ -10,11 +10,19 @@ knitr::opts_chunk$set(
     width = 180, 
     error = TRUE
 )
+library(tidyCoverage)
+library(AnnotationHub)
+library(purrr)
+library(plyranges)
+library(rtracklayer)
+library(ggplot2) 
 ```
 
 # Plotting aggregate signals (ENCODE data) over REs
 
-```{r}
+_Note: this is a Quarto vignette (`.qmd`)_
+
+```{r, eval = FALSE}
 library(tidyCoverage)
 library(AnnotationHub)
 library(purrr)
@@ -92,7 +100,7 @@ AC |>
 
 # Plotting matrix signals (ENCODE data) over REs
 
-```{r}
+```{r, eval = FALSE}
 expand(CE) |> 
     filter(track == "ATAC") |> 
     select(-coord) |> 
