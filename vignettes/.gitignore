@@ -2,3 +2,4 @@
 *.R
 *.bed
 *qmd
+/.quarto/
