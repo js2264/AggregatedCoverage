@@ -1,29 +1,13 @@
-pkgVer <- function(pkg) {
-    if (!exists("meta") || is.null(meta)) meta <- packageDescription(pkg)
-    ver <- meta$Version
-    paste0('https://github.com//', pkg, ' - R package version ', ver)
-}
-
-c(
-
-    bibentry(bibtype="manual",
-        title = "Jacques' Package",
-        author = personList(
-            as.person("Jacques")
-        ),
-        year = format(Sys.Date(), "%Y"),
-        url = "http://www.bioconductor.org/packages/AggregatedCoverage",
-        note = pkgVer('AggregatedCoverage'),
-        doi = '10.18129/B9.bioc.AggregatedCoverage'
+bibentry(
+    bibtype = "Article",
+    author = c(
+        person(c("Jacques"), "Serizay"),
+        person(c("Romain"), "Koszul")
     ),
-    bibentry(bibtype="article",
-        title = "Jacques' Package",
-        author = personList(
-            as.person("Jacques")
-        ),
-        year = format(Sys.Date(), "%Y"),
-        journal = "bioRxiv",
-        doi = "10.1101/TODO",
-        url = "https://www.biorxiv.org/content/10.1101/TODO"
-    )
+    title = "Epigenomics coverage data extraction and aggregation in R with tidyCoverage",
+    journal = "Bioinformatics",
+    year = "2024",
+    volume = "40",
+    pages = "btae487",
+    doi =  "10.1093/bioinformatics/btae487"
 )

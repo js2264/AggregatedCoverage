@@ -1,6 +1,13 @@
+[![DOI](https://img.shields.io/badge/Bioinformatics-10.1038/10.1093/bioinformatics/btae487x-blue)](https://doi.org/10.1093/bioinformatics/btae487)
+[![](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://www.tidyverse.org/lifecycle/#stable)
+
 # tidyCoverage
 
 The `tidyCoverage` R package provides a framework for rapid investigation of collections of genomic tracks over genomic features, relying on the principle of tidy data manipulation. It relies on `CoverageExperiment` and `AggregatedCoverage` classes, directly extending the `SummarizedExperiment` fundamental class,
+
+If you are using `tidyCoverage`, please consider citing: 
+
+Serizay J, Koszul R (2024). “Epigenomics coverage data extraction and aggregation in R with tidyCoverage.” _Bioinformatics_ *40*, doi:10.1093/bioinformatics/btae487 <https://doi.org/10.1093/bioinformatics/btae487>.
 
 ## Installation 
 
