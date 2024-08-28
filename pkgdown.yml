@@ -1,6 +1,6 @@
-pandoc: '3.2'
+pandoc: '3.3'
 pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
   tidyCoverage: tidyCoverage.html
-last_built: 2024-07-31T20:57Z
+last_built: 2024-08-28T21:11Z

@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">tidyCoverage</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,10 +46,13 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9"><div class="section level1">
+  <main id="main" class="col-md-9">
+<div class="section level1">
 <div class="page-header"><h1 id="tidycoverage">tidyCoverage<a class="anchor" aria-label="anchor" href="#tidycoverage"></a>
 </h1></div>
 <p>The <code>tidyCoverage</code> R package provides a framework for rapid investigation of collections of genomic tracks over genomic features, relying on the principle of tidy data manipulation. It relies on <code>CoverageExperiment</code> and <code>AggregatedCoverage</code> classes, directly extending the <code>SummarizedExperiment</code> fundamental class,</p>
+<p>If you are using <code>tidyCoverage</code>, please consider citing:</p>
+<p>Serizay J, Koszul R (2024). “Epigenomics coverage data extraction and aggregation in R with tidyCoverage.” <em>Bioinformatics</em> <em>40</em>, <a href="doi:10.1093/bioinformatics/btae487" class="uri">doi:10.1093/bioinformatics/btae487</a> <a href="https://doi.org/10.1093/bioinformatics/btae487" class="external-link uri">https://doi.org/10.1093/bioinformatics/btae487</a>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -147,6 +150,7 @@
 <p>Compared to these existing solutions, <code>tidyCoverage</code> directly extends <code>SummarizedExperiment</code> infrastructure and follows <a href="https://www.biorxiv.org/content/10.1101/2023.09.10.557072v2" class="external-link">tidy “omics” principles</a>. It does not directly provide <strong>plotting</strong> functionalities, but instead focuses on data recovery, structure and coercion, using a familiar grammar and standard representation of the data. This ensures seamless integration of genomic track investigation in exisiting <code>Bioconductor</code> and data analysis workflows.</p>
 </div>
 </div>
+
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
@@ -186,7 +190,13 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://doi.org/10.1093/bioinformatics/btae487" class="external-link"><img src="https://img.shields.io/badge/Bioinformatics-10.1038/10.1093/bioinformatics/btae487x-blue" alt="DOI"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-green.svg"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>
